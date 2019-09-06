@@ -1,0 +1,27 @@
+---
+version: 1.0
+configuration:
+  has_webserver: true
+  scoring:
+    command: "export JENKINS_HOME=~/.jenkins; bash scripts/.checks.sh Todo_Tasks 1 tests src/test/java/com/Play/.pass src/test/java/com/Play/.fail"
+    files:
+      - "tests/gitvalidation.xml"
+      - "tests/npmfrontvalidation.xml"
+      - "tests/npmbackvalidation.xml"
+      - "tests/lintbackvalidation.xml"
+      - "tests/lintfrontvalidation.xml"
+      - "tests/cloverfrontvalidation.xml"
+      - "tests/cloverbackvalidation.xml"
+      - "tests/unittestfrontvalidation.xml"
+      - "tests/unittestbackvalidation.xml"
+      - "tests/securitybackvalidation.xml"
+      - "tests/securityfrontvalidation.xml"
+  ide_config:
+    default_open_files: []
+    project_menu:
+      run: "export JENKINS_HOME=~/.jenkins; mvn exec:exec -Dvar.port=8000"
+      install: "mvn clean install"
+      test: "export JENKINS_HOME=~/.jenkins; bash scripts/.checks.sh Todo_Tasks 1 tests src/test/java/com/Play/.pass src/test/java/com/Play/.fail" 
+  readonly_paths:
+    - scripts/
+

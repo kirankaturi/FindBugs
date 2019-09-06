@@ -1,0 +1,100 @@
+<!--
+ Pom file to download jenkins war file and install it using `mvn exec:exec -Dvar.port=8000`
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<modelVersion>4.0.0</modelVersion>
+<groupId>com.Play</groupId>
+<artifactId>mvn-jkn</artifactId>
+<packaging>jar</packaging>
+<version>1.0-SNAPSHOT</version>
+<name>mvn-jkn</name>
+<url>http://maven.apache.org</url>
+<properties>
+<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<maven.compiler.source>1.7</maven.compiler.source>
+<maven.compiler.target>1.7</maven.compiler.target>
+</properties>
+<dependencies>
+<dependency>
+<groupId>junit</groupId>
+<artifactId>junit</artifactId>
+<version>3.8.1</version>
+<scope>test</scope>
+</dependency>
+<dependency>
+<groupId>org.webjars</groupId>
+<artifactId>eslint</artifactId>
+<version>0.5.1</version>
+</dependency>
+</dependencies>
+
+<build>
+<plugins>
+<plugin>
+<groupId>org.codehaus.mojo</groupId>
+<artifactId>exec-maven-plugin</artifactId>
+ <!--  TO BE REPLACED WITH WAR PLUGIN  -->
+<version>1.6.0</version>
+<executions>
+<execution>
+<goals>
+<goal>exec</goal>
+</goals>
+</execution>
+</executions>
+<configuration>
+<executable>java</executable>
+<mainClass>com.Play.App</mainClass>
+</configuration>
+</plugin>
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-site-plugin</artifactId>
+<version>3.7.1</version>
+</plugin>
+
+  <plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>cobertura-maven-plugin</artifactId>
+    <version>2.6</version>
+    <configuration>
+      <formats>
+        <format>xml</format>
+      </formats>
+    </configuration>
+    </plugin>
+
+            <plugin>
+                <groupId>com.checkmarx.maven</groupId>
+                <artifactId>checkmarx-maven-plugin</artifactId>
+                <version>x.xx.x</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>commons-io</groupId>
+                        <artifactId>commons-io</artifactId>
+                        <version>2.5</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                <formats>
+          <format>xml</format>
+        </formats>          
+                </configuration>          
+            </plugin>
+<plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>1.9</version>
+        <executions>
+          <execution>
+            <id>parse-version</id>
+            <goals>
+              <goal>parse-version</goal>
+            </goals>
+            <phase>validate</phase>
+          </execution>
+        </executions>
+      </plugin>
+   </plugins>
+</build>
+</project>
